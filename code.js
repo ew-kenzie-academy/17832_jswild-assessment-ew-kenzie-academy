@@ -13,7 +13,7 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
   
 */
 
-/* Boilerplate */{
+/* MDN Boilerplate */{
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -45,7 +45,11 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 // xi=undefined; navigator.geolocation.getCurrentPosition( (lambda) =>{ xi=lambda } )
 
-/* Step 2 
+/* Step 2 /*
+
+
+
+/*
   Example Query: 
    https://flickr.com/services/rest/ \
     ?api_key=993fake589fake6cdfakefcb \
@@ -68,4 +72,65 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
       &lat=39.76574 \
       &lon=-86.1579024 \
       &text=dog \
+      
+  https://shrouded-mountain-15003.herokuapp.com/  \
+    https://flickr.com/services/rest/  \
+      ?api_key=993c9d05898cfd6cd16b4fcb18401be0 \
+      &format=json \
+      &nojsoncallback=1 \
+      &method=flickr.photos.search \
+      &safe_search=1 \
+      &per_page=5 \
+      &lat=39.76574 \
+      &lon=-86.1579024 \
+      &text=dog \
 */
+
+/* Step 3 */
+/*
+  https://javascript.info/fetch
+  https://www.flickr.com/services/api/flickr.photos.search.html
+*/
+
+response = await fetch("https://shrouded-mountain-15003.herokuapp.com/https://my.kenzie.academy/login/canvas");
+
+async function lambda(src="https://shrouded-mountain-15003.herokuapp.com/https://www.yahoo.com"){
+  response = await fetch(src);
+  json=undefined;
+  if (response.ok)// if HTTP-status is 200-299
+    // get the response body
+    json = await response.json();
+  else 
+    alert("HTTP-Error: " + response.status);
+  return json;
+}
+
+src = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
+response = await fetch(src);
+commits = await response.json(); 
+
+src = "https://shrouded-mountain-15003.herokuapp.com/https://www.yahoo.com/";
+response = await fetch(src);
+commits = await response.json();
+
+async function getDocument(src = "https://www.yahoo.com/",cors=true){
+  if(cors)
+    src="https://shrouded-mountain-15003.herokuapp.com/"+src;
+  lambda=undefined;
+  fetch(src)
+    .then(response => response.text())
+    .then(result => {lambda=result});
+  return Promise.resolve(lambda);
+}
+
+/*<save>*/{
+lambda=undefined;
+source = "https://www.google.com/"
+cors=true
+  if(cors)
+    source="https://shrouded-mountain-15003.herokuapp.com/"+source;
+  lambda=undefined;
+  fetch(source)
+    .then(response => response.text())
+    .then(result => {console.log(result);});
+/*<save>*/}
