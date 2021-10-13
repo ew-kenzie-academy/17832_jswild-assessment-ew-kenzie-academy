@@ -123,7 +123,23 @@ async function getDocument(src = "https://www.yahoo.com/",cors=true){
   return Promise.resolve(lambda);
 }
 
-/*<save>*/{
+/*<save 0>*/{
+/* NoScript gets in the way of fetching sometimes.
+*/
+lambda=undefined;
+source = "https://www.google.com/"
+cors=true
+  if(cors)
+    source="https://shrouded-mountain-15003.herokuapp.com/"+source;
+  lambda=undefined;
+  fetch(source)
+    .then(response => response.text())
+    .then(result => {console.log(result);});
+/*<save>*/}
+
+/*<save 1>*/{
+/* NoScript gets in the way of fetching sometimes.
+*/
 lambda=undefined;
 source = "https://www.google.com/"
 cors=true
