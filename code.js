@@ -1,5 +1,5 @@
 const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
-
+const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
 /* Step 1 */
 /*mdn::watchPosition*/
   let currentLocation;
@@ -32,10 +32,8 @@ const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
   
   function w_error(err) {
     console.warn(':error: [' + err.code + '] ' + err.message);
-    // setInterval(function(){ 
-          // console.log("There was an error"); 
-      // },3000);'
     w_failure();
+    setInterval( w_failure , 16000);
   }
   
   function printCurrent(){
@@ -72,49 +70,17 @@ const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 /* Step 2 */
 
-
- queryURL=`https://flickr.com/services/rest/`
-          +`?api_key=993fake589fake6cdfakefcb` 
+ let globalVariable=undefined;
+ srcURL   =`https://flickr.com/services/rest/`
+          +`?api_key=`+PUBLIC_KEY
           +`&format=json&nojsoncallback=1` 
           +`&method=flickr.photos.search` 
           +`&safe_search=1&per_page=5` 
-          +`&lat=39.76574` 
-          +`&lon=-86.1579024`  
-          +`&text=dog`;
-    
- /*
-  Example Query: 
-   https://flickr.com/services/rest/ \
-    ?api_key=993fake589fake6cdfakefcb \
-    &format=json&nojsoncallback=1 \
-    &method=flickr.photos.search \
-    &safe_search=1&per_page=5 \
-    &lat=39.76574 \
-    &lon=-86.1579024  \
-    &text=dog   # the search term
+          +`&lat=${currentLocation.latitude}` 
+          +`&lon=${currentLocation.longitude}`  
+          +`&text=turtle`;
+  // test="https://www.flickr.com/services/rest/?api_key=7fa605c741f09836731d1fddf05680de&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-12.0775241&lon=161.3727767&text=turtle"
+  let source=CORS_PRE+srcURL;
+  fetch(source).then(re => re.json()).then(re => {console.log(re);globalVariable=re})
+/* Step 3 */
   
-  Same Query sent to a CORS proxy:
-  https://shrouded-mountain-15003.herokuapp.com/  \
-    https://flickr.com/services/rest/  \
-      ?api_key=993c9d05898cfd6cd16b4fcb18401be0 \
-      &format=json \
-      &nojsoncallback=1 \
-      &method=flickr.photos.search \
-      &safe_search=1 \
-      &per_page=5 \
-      &lat=39.76574 \
-      &lon=-86.1579024 \
-      &text=dog \
-      
-  https://shrouded-mountain-15003.herokuapp.com/  \
-    https://flickr.com/services/rest/  \
-      ?api_key=993c9d05898cfd6cd16b4fcb18401be0 \
-      &format=json \
-      &nojsoncallback=1 \
-      &method=flickr.photos.search \
-      &safe_search=1 \
-      &per_page=5 \
-      &lat=39.76574 \
-      &lon=-86.1579024 \
-      &text=dog \
-*/
