@@ -1,14 +1,15 @@
 const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 /* Step 1 */
-/*mdn::watchPosition*/{
+/*mdn::watchPosition*/
+  let currentLocation;
   const WATCH_OPTS = {
     enableHighAccuracy: false,
     timeout: 8000,
     maximumAge: 0
   };
   
-  let currentLocation = {
+  currentLocation = {
     latitude :  -1,
     longitude:  -1,
     stamp:      -1
@@ -24,18 +25,17 @@ const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
   
   function w_failure(){
     currentLocation.latitude  = rlat();
-    currentLocation.longitude = rlon;    
+    currentLocation.longitude = rlon();    
     currentLocation.stamp     = Date.now();
     printCurrent();     
   }
   
   function w_error(err) {
     console.warn(':error: [' + err.code + '] ' + err.message);
-    setInterval(function(){ 
-          console.log("There was an error"); 
-      }, 
-      3000
-    );
+    // setInterval(function(){ 
+          // console.log("There was an error"); 
+      // },3000);'
+    w_failure();
   }
   
   function printCurrent(){
@@ -68,7 +68,7 @@ const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
   /* Begin Watching */
   let w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
 
-/*mdn::watchPosition*/}
+/*mdn::watchPosition*/
 
 /* Step 2 */
 
