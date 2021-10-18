@@ -10,6 +10,8 @@
     a call and perhaps there is a checkbox to /always allow/.
   + https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
   + https://stackoverflow.com/questions/46879570/call-a-javascript-function-infinitely
+  + https://en.wikipedia.org/wiki/Latitude
+  + https://en.wikipedia.org/wiki/Longitude
 */
 
 /* MDN Boilerplate */{  

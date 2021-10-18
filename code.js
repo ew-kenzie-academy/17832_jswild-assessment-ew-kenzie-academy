@@ -1,11 +1,7 @@
-PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
-
-/* What is the abstraction of a promise? */
+const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 /* Step 1 */
 /*mdn::watchPosition*/{
-  let w_id;
-  
   const WATCH_OPTS = {
     enableHighAccuracy: false,
     timeout: 8000,
@@ -26,14 +22,20 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
     printCurrent();
   }
   
+  function w_failure(){
+    currentLocation.latitude  = rlat();
+    currentLocation.longitude = rlon;    
+    currentLocation.stamp     = Date.now();
+    printCurrent();     
+  }
+  
   function w_error(err) {
     console.warn(':error: [' + err.code + '] ' + err.message);
-    setInterval(
-    function(){ 
-        console.log("There was an error"); 
-    }, 
-    3000
-  );
+    setInterval(function(){ 
+          console.log("There was an error"); 
+      }, 
+      3000
+    );
   }
   
   function printCurrent(){
@@ -43,8 +45,28 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
       console.log( `:print: <${timeid}> [tim] `  + currentLocation.stamp     );
   }
 
+  function runif(n=-1){
+    if(n==-1 || typeof n !== "number")
+      return Math.random();
+    return Number(Math.random().toString().substr(0,n+2));
+  }
+  
+  function rind(){
+    if(Math.random()>.5)
+      return 1;
+    return -1;
+  }
+  
+  function rlat(){
+    return rind()*Math.trunc(runif()*90)+runif(7);
+  }
+  
+  function rlon(){
+    return rind()*Math.trunc(runif()*180)+runif(7);
+  }
+  
   /* Begin Watching */
-  w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
+  let w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
 
 /*mdn::watchPosition*/}
 
