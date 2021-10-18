@@ -33,9 +33,9 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
-  /*
-  navigator.geolocation.getCurrentPosition(success, error, options);
 
+  navigator.geolocation.getCurrentPosition(success, error, options);
+  /*
     19:56:17.129 Your current position is:   code.js:24:11
     19:56:17.130 Latitude : 39.9924981       code.js:25:11
     19:56:17.130 Longitude: -105.14479       code.js:26:11
