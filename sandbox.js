@@ -61,7 +61,7 @@
   };
   options = {
     enableHighAccuracy: false,
-    timeout: 5000,
+    timeout: 8000,
     maximumAge: 0
   };
 
@@ -73,20 +73,20 @@
       navigator.geolocation.clearWatch(id);
     }
     else{
-      current.latitude  =crd.latitude;
-      current.longitude =crd.longitude;    
-      current.stamp=Date.now();
+      current.latitude  = crd.latitude;
+      current.longitude = crd.longitude;    
+      current.stamp     = Date.now();
       printCurrent();
     }
   }
   function error(err) {
-    console.warn('ERROR(' + err.code + '): ' + err.message);
+    console.warn(':error: <' + err.code + '> ' + err.message);
   }
   
   function printCurrent(){
-      console.log(    "[lat] "  + current.latitude  );
-      console.log(    "[lon] "  + current.longitude );
-      console.log(    "[time] " + current.stamp     );
+      console.log(  "[lat] "  + current.latitude  );
+      console.log(  "[lon] "  + current.longitude );
+      console.log(  "[time] " + current.stamp     );
     
   }
 
