@@ -1,18 +1,17 @@
-PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
-
-/* What is the abstraction of a promise? */
-
-/* Step 1 */
 /*
   + https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
   + https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
+  + https://www.w3schools.com/JS//js_async.asp
+  + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+  + What is the abstraction of a promise? 
   + [2021-10-10 19:48] There exists a small dialog notification that pops
     out at the top of the firefox window. A message asks whether we want
     to allow something to know our location. It asks me every time that I make
     a call and perhaps there is a checkbox to /always allow/.
+  + https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
 */
 
-/* MDN Boilerplate */{
+/* MDN Boilerplate */{  
   let options = {
     enableHighAccuracy: false,
     timeout: 5000,
@@ -45,18 +44,72 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 /* Boilerplate */}
 
 /* Assign a variable  in the outer scope */{
-xi=undefined;
-navigator.geolocation.getCurrentPosition( (lambda) =>{ xi=lambda } )
+  xi=undefined;
+  navigator.geolocation.getCurrentPosition( (lambda) =>{ xi=lambda } )
 /* Assign */}
 
+/*mdn::watchPosition*/{
+  let id, target, options;
+  target = {
+    latitude : 0,
+    longitude: 0
+  };
+  current = {
+    latitude : -1,
+    longitude: -1,
+  };
+  options = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
+  function success(pos) {
+    var crd = pos.coords;
+    if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+      console.log('Congratulations, you reached the target');
+      navigator.geolocation.clearWatch(id);
+    }
+    else{
+      console.log("[lat] "+ lat);
+      console.log("[lon] "+ lon);    
+    }
+  }
+
+  function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  }
+
+  id = navigator.geolocation.watchPosition(success, error, options);
+
+/*mdn::watchPosition*/}
+
+
+
+
+
+
+
+
+
+
+
 async function getPos(){
-    let lat=;
-    let lon=;
-    navigator.geolocation.getCurrentPosition( (lambda) =>{
-      xi=lambda
+    let lat=0;
+    let lon=0;
+    await navigator.geolocation.getCurrentPosition( (pos) =>{
+      lat=pos.coords.latitude;
+      lon=pos.coords.longitude;
+      console.log("[lat] "+ lat);
+      console.log("[lon] "+ lon);
     });
-    return {lat,lon}
+    console.log("[lat] "+ lat);
+    console.log("[lon] "+ lon);
+    return {lat,lon};
 }
+
+xi=null;
+getPos().then(r => r).then(r => xi = r);
 
 
 
