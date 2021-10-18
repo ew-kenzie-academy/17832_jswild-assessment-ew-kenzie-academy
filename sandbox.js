@@ -10,18 +10,17 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
     out at the top of the firefox window. A message asks whether we want
     to allow something to know our location. It asks me every time that I make
     a call and perhaps there is a checkbox to /always allow/.
-  
 */
 
 /* MDN Boilerplate */{
-  var options = {
-    enableHighAccuracy: true,
+  let options = {
+    enableHighAccuracy: false,
     timeout: 5000,
     maximumAge: 0
   };
 
   function success(pos) {
-    var crd = pos.coords;
+    let crd = pos.coords;
 
     console.log('Your current position is:');
     console.log(`Latitude : ${crd.latitude}`);
@@ -35,20 +34,33 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 
   navigator.geolocation.getCurrentPosition(success, error, options);
+  
   /*
     19:56:17.129 Your current position is:   code.js:24:11
     19:56:17.130 Latitude : 39.9924981       code.js:25:11
     19:56:17.130 Longitude: -105.14479       code.js:26:11
     19:56:17.130 More or less 23.543 meters. code.js:27:11
   */
+  
 /* Boilerplate */}
 
-// xi=undefined; navigator.geolocation.getCurrentPosition( (lambda) =>{ xi=lambda } )
+/* Assign a variable  in the outer scope */{
+xi=undefined;
+navigator.geolocation.getCurrentPosition( (lambda) =>{ xi=lambda } )
+/* Assign */}
+
+async function getPos(){
+    let lat=;
+    let lon=;
+    navigator.geolocation.getCurrentPosition( (lambda) =>{
+      xi=lambda
+    });
+    return {lat,lon}
+}
+
+
 
 /* Step 2 /*
-
-
-
 /*
   Example Query: 
    https://flickr.com/services/rest/ \
