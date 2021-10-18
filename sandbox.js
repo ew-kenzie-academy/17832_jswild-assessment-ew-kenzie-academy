@@ -57,7 +57,7 @@
   current = {
     latitude :         -1,
     longitude:         -1,
-    stamp:     Date.now(),
+    stamp:             -1
   };
   options = {
     enableHighAccuracy: false,
@@ -73,13 +73,21 @@
       navigator.geolocation.clearWatch(id);
     }
     else{
-      console.log("[lat] "+ crd.latitude);
-      console.log("[lon] "+ crd.longitude);    
+      current.latitude  =crd.latitude;
+      current.longitude =crd.longitude;    
+      current.stamp=Date.now();
+      printCurrent();
     }
   }
-
   function error(err) {
     console.warn('ERROR(' + err.code + '): ' + err.message);
+  }
+  
+  function printCurrent(){
+      console.log(    "[lat] "  + current.latitude  );
+      console.log(    "[lon] "  + current.longitude );
+      console.log(    "[time] " + current.stamp     );
+    
   }
 
   id = navigator.geolocation.watchPosition(success, error, options);
