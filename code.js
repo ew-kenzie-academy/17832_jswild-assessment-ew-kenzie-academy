@@ -1,8 +1,9 @@
 const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
-/* Step 1 */
+let history=[];
+let currentLocation;
+
 /*mdn::watchPosition*/
-  let currentLocation;
   const WATCH_OPTS = {
     enableHighAccuracy: false,
     timeout: 8000,
@@ -10,12 +11,13 @@ const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
   };
   
   currentLocation = {
-    latitude :  -1,
-    longitude:  -1,
-    stamp:      -1
+    latitude :  null,
+    longitude:  null,
+    stamp:      null
   };
 
   function w_success(pos) {
+    history.push(currentLocation);
     let crd = pos.coords;
     currentLocation.latitude  = crd.latitude;
     currentLocation.longitude = crd.longitude;    
@@ -24,6 +26,7 @@ const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
   }
   
   function w_failure(){
+    history.push(currentLocation);
     currentLocation.latitude  = rlat();
     currentLocation.longitude = rlon();    
     currentLocation.stamp     = Date.now();
@@ -64,30 +67,53 @@ const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
   }
   
   /* Begin Watching */
-  console.log(":global: Please set permission to allow")
+  console.log(":global: [thread-block] Please set location permission to Allow")
   let w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
 
 /*mdn::watchPosition*/
 
 /* Step 2 */ /* Step 3 */
-// test="https://www.flickr.com/services/rest/?api_key=7fa605c741f09836731d1fddf05680de&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-12.0775241&lon=161.3727767&text=turtle"
+
 function constructImageURL (photoObj) {
   return "https://farm" + photoObj.farm +
           ".staticflickr.com/" + photoObj.server +
           "/" + photoObj.id + "_" + photoObj.secret + ".jpg";
 }
+
+function constructFetchURL(){
+  let srcURL
+    =`https://flickr.com/services/rest/`
+    +`?api_key=`+PUBLIC_KEY
+    +`&format=json&nojsoncallback=1` 
+    +`&method=flickr.photos.search` 
+    +`&safe_search=1&per_page=5` 
+    +`&lat=${currentLocation.latitude}` 
+    +`&lon=${currentLocation.longitude}`  
+    +`&text=turtle`;
+  return source=CORS_PRE+srcURL;
+}
+
 let gvar   = undefined;
 let source =        "";
 function main(){
- srcURL   =`https://flickr.com/services/rest/`
-          +`?api_key=`+PUBLIC_KEY
-          +`&format=json&nojsoncallback=1` 
-          +`&method=flickr.photos.search` 
-          +`&safe_search=1&per_page=5` 
-          +`&lat=${currentLocation.latitude}` 
-          +`&lon=${currentLocation.longitude}`  
-          +`&text=turtle`;
-  source=CORS_PRE+srcURL;
-  fetch(source).then(re => re.json()).then(re => {console.log(re);gvar=re});
-  //const imageUrl = constructImageURL(re.photos.photo[0]);
+  fetch(constructFetchURL())
+    .then(re => re.json())
+    .then(re => {
+      console.log(re);
+      gvar=re});
+  gvar.photos.photo[0];
+  imageUrl = constructImageURL(gvar.photos.photo[0]);
+}
+
+// setTimeout(main,10000);
+
+class Position{
+  latitude  = null;
+  longitude = null;
+  stamp     = null;
+  constructor(lat,lon){
+    this.latitude  = lat;
+    this.longitude = lon;
+    this.stamp     = Date.now();
+  }
 }
