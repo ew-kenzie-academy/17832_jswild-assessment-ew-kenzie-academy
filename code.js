@@ -4,50 +4,47 @@ PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 
 /* Step 1 */
 /*mdn::watchPosition*/{
-  let id, target, current, options;
-  target = {
-    latitude : 0,
-    longitude: 0
-  };
-  current = {
-    latitude :         -1,
-    longitude:         -1,
-    stamp:             -1
-  };
-  options = {
+  let w_id;
+  
+  const WATCH_OPTS = {
     enableHighAccuracy: false,
     timeout: 8000,
     maximumAge: 0
   };
+  
+  let currentLocation = {
+    latitude :  -1,
+    longitude:  -1,
+    stamp:      -1
+  };
 
-  function success(pos) {
+  function w_success(pos) {
     let crd = pos.coords;
-    if (target.latitude === crd.latitude 
-        && target.longitude === crd.longitude){
-      console.log('Congratulations, you reached the target');
-      navigator.geolocation.clearWatch(id);
-    }
-    else{
-      current.latitude  = crd.latitude;
-      current.longitude = crd.longitude;    
-      current.stamp     = Date.now();
-      printCurrent();
-    }
+    currentLocation.latitude  = crd.latitude;
+    currentLocation.longitude = crd.longitude;    
+    currentLocation.stamp     = Date.now();
+    printCurrent();
   }
-  function error(err) {
-    console.warn(':error: <' + err.code + '> ' + err.message);
+  
+  function w_error(err) {
+    console.warn(':error: [' + err.code + '] ' + err.message);
+    setInterval(
+    function(){ 
+        console.log("There was an error"); 
+    }, 
+    3000
+  );
   }
   
   function printCurrent(){
-      timeid =      String(Date.now()).substr(9);
-      console.log( `:print: <${timeid}> [lat] `  + current.latitude  );
-      console.log( `:print: <${timeid}> [lon] `  + current.longitude );
-      console.log( `:print: <${timeid}> [tim] `  +  current.stamp     );
-    
+      timeid =      String(Date.now()).substr(7,10);
+      console.log( `:print: <${timeid}> [lat] `  + currentLocation.latitude  );
+      console.log( `:print: <${timeid}> [lon] `  + currentLocation.longitude );
+      console.log( `:print: <${timeid}> [tim] `  + currentLocation.stamp     );
   }
 
   /* Begin Watching */
-  id = navigator.geolocation.watchPosition(success, error, options);
+  w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
 
 /*mdn::watchPosition*/}
 
