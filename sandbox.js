@@ -49,14 +49,15 @@
 /* Assign */}
 
 /*mdn::watchPosition*/{
-  let id, target, options;
+  let id, target, current, options;
   target = {
     latitude : 0,
     longitude: 0
   };
   current = {
-    latitude : -1,
-    longitude: -1,
+    latitude :         -1,
+    longitude:         -1,
+    stamp:     Date.now(),
   };
   options = {
     enableHighAccuracy: false,
@@ -65,14 +66,15 @@
   };
 
   function success(pos) {
-    var crd = pos.coords;
-    if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+    let crd = pos.coords;
+    if (target.latitude === crd.latitude 
+        && target.longitude === crd.longitude){
       console.log('Congratulations, you reached the target');
       navigator.geolocation.clearWatch(id);
     }
     else{
-      console.log("[lat] "+ lat);
-      console.log("[lon] "+ lon);    
+      console.log("[lat] "+ crd.latitude);
+      console.log("[lon] "+ crd.longitude);    
     }
   }
 
