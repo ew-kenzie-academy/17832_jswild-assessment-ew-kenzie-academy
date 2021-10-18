@@ -69,8 +69,7 @@ const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
 /*mdn::watchPosition*/
 
 /* Step 2 */
-
- let globalVariable=undefined;
+  // test="https://www.flickr.com/services/rest/?api_key=7fa605c741f09836731d1fddf05680de&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-12.0775241&lon=161.3727767&text=turtle"
  srcURL   =`https://flickr.com/services/rest/`
           +`?api_key=`+PUBLIC_KEY
           +`&format=json&nojsoncallback=1` 
@@ -79,8 +78,9 @@ const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
           +`&lat=${currentLocation.latitude}` 
           +`&lon=${currentLocation.longitude}`  
           +`&text=turtle`;
-  // test="https://www.flickr.com/services/rest/?api_key=7fa605c741f09836731d1fddf05680de&format=json&nojsoncallback=1&method=flickr.photos.search&safe_search=1&per_page=5&lat=-12.0775241&lon=161.3727767&text=turtle"
-  let source=CORS_PRE+srcURL;
-  fetch(source).then(re => re.json()).then(re => {console.log(re);globalVariable=re})
+
 /* Step 3 */
-  
+  let gvar=undefined;
+  let source="";
+  source=CORS_PRE+srcURL;
+  fetch(source).then(re => re.json()).then(re => {console.log(re);gvar=re})
