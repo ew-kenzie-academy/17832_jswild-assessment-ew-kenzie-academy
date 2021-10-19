@@ -5,13 +5,17 @@ body{
     flex-direction : column;
 }
 
-body h1{
-    color:red;
+body h2{
+    color             : red;
+    background-color  : lightcyan;
+    text-align        : center;
+    height            : 1em ;
 }
 
-body card{
-    color:blue;
-    display:flex;
-    flex-direction:row;
-    align-items:
+body div.card{
+    color             : blue      ;
+    background-color  : lightblue ;
+    display           : flex      ;
+    flex-direction    : row       ;
+    height            : 5em       ;
 }
