@@ -101,11 +101,10 @@ function constructFetchURL(){
     +`&lat=${currentLocation.latitude}` 
     +`&lon=${currentLocation.longitude}`  
     +`&text=turtle`;
-  return source=CORS_PRE+srcURL;
+  return CORS_PRE+srcURL;
 }
 
 let gvar   = undefined;
-let source =        "";
 function main(){
   fetch(constructFetchURL())
     .then(re => re.json())
@@ -113,8 +112,8 @@ function main(){
       console.log(re);
       gvar=re;
       imageUrl = constructImageURL(gvar.photos.photo[0]);
-      body=document.querySelector("body");
-      lambda=document.createElement("img");
+      body=document.querySelector(   "body" );
+      lambda=document.createElement( "img"  );
       lambda.src=imageUrl;
       body.append(lambda);
   });
