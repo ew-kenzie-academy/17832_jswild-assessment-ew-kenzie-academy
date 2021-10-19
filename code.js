@@ -45,7 +45,7 @@ function getCity(city){
   return new Position( index[city][0] , index[city][1] );
 }
 
-/*watchPosition*/
+/*watchPosition*/{
   function w_default(lat,lon){
     currentLocation=new Position(lat,lon);
     history.push(currentLocation);
@@ -88,6 +88,9 @@ function getCity(city){
     , w_OPTS
   );
   
+/*watchPosition*/}
+
+/*psrng*/{
   function runif(n=-1){
     if(n==-1 || typeof n !== "number")
       return Math.random();
@@ -105,7 +108,7 @@ function getCity(city){
   function rlon(){
     return rind()*Math.trunc(runif()*180)+runif(7);
   }
-/*watchPosition*/
+/*psrng*/}
 
 function constructImageURL (photoObj) {
   return    "https://farm"
@@ -130,36 +133,38 @@ function constructFetchURL(){
   return CORS_PRE+srcURL;
 }
 
-const imgQueue=
-  ["./turtle1.jpg"
-  ,"./turtle2.jpg"
-  ,"./turtle3.jpg"
-  ,"./turtle4.jpg"
-  ]
-let pivot=0;
+/*abstractQueue*/{
+  const imgQueue=
+    ["./turtle1.jpg"
+    ,"./turtle2.jpg"
+    ,"./turtle3.jpg"
+    ,"./turtle4.jpg"
+    ]
+  let pivot=0;
 
-function clearQueue(){
-  while(imgQueue.pop()!=undefined);
-}
+  function clearQueue(){
+    while(imgQueue.pop()!=undefined);
+  }
 
-function refresh(){
-    IMGTAG.src  = imgQueue[pivot];
-}
-function fillQueue(q){
-  q.forEach(e => imgQueue.push(e));
-}
-function replaceQueue(q){
-  clearQueue();
-  fillQueue(q);
-}
-function rotR(){
-  pivot=(pivot+1)%imgQueue.length;
-  refresh();
-}
-function rotL(){
-  pivot=(pivot-1+imgQueue.length)%imgQueue.length;
-  refresh();
-}
+  function refresh(){
+      IMGTAG.src  = imgQueue[pivot];
+  }
+  function fillQueue(q){
+    q.forEach(e => imgQueue.push(e));
+  }
+  function replaceQueue(q){
+    clearQueue();
+    fillQueue(q);
+  }
+  function rotR(){
+    pivot=(pivot+1)%imgQueue.length;
+    refresh();
+  }
+  function rotL(){
+    pivot=(pivot-1+imgQueue.length)%imgQueue.length;
+    refresh();
+  }
+/*abstractQueue*/}
 
 gvar=undefined;
 jaja=[];
@@ -182,6 +187,7 @@ function main(){
   });
 }
 
+// Conjunction via concatenation
 document.querySelector(".button.left"  ).addEventListener("click", rotL);
 document.querySelector(".button.right" ).addEventListener("click", rotR);
 
@@ -195,9 +201,3 @@ document.querySelector(".button.right" ).addEventListener("click", rotR);
 // currentLocation=getCity("EDINBURGH");main()
 // currentLocation=getCity("kyoto");main()
 
-function practice(e){
-  if(e !== undefined)
-    console.log(":practice: found ["+"undefined"+"]");
-  else
-    console.log(":practice: found ["+e+"]");
-}

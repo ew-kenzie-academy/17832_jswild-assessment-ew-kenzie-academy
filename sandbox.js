@@ -300,3 +300,10 @@ cors=true
   }
   lambda().then(v => console.log(v))
 /*<save>*/}
+
+function practice(e){
+  if(e !== undefined)
+    console.log(":practice: found ["+"undefined"+"]");
+  else
+    console.log(":practice: found ["+e+"]");
+}
