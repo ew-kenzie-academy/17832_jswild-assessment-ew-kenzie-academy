@@ -37,6 +37,7 @@ function getCity(city){
     , PHILADELPHIA :[t(39 , 57 , 10) , (-1)*t( 75 ,  9 , 49) ]
     , BALTIMORE    :[t(37 , 17 , 22) , (-1)*t( 76 , 36 , 55) ]
     , MONTREAL     :[t(45 , 30 , 32) , (-1)*t( 73 , 33 , 15) ]
+    , NOWHERE      :[t(90 , 00 , 00) , (-1)*t( 00 , 00 , 00) ]
   };
   return new Position( index[city][0] , index[city][1] );
 }
@@ -91,9 +92,7 @@ function getCity(city){
   }
   
   function rind(){
-    if(Math.random()>.5)
-      return 1;
-    return -1;
+    return (Math.random()>.5)?1:-1;
   }
   
   function rlat(){
@@ -148,13 +147,19 @@ function replaceQueue(q){
 function rotR(){
 }
 
+gvar=undefined;
 function main(){
   fetch(constructFetchURL())
     .then(re => re.json())
     .then(re => {
-      console.log(re);
-      gvar     = re;
-      imageUrl = constructImageURL(gvar.photos.photo[0]);
+      gvar=re;
+      console.log(":main: "+ re);
+      if(re.photos.photo.length===0){
+        console.log(":main: "+ "Nothing here :P");
+        return;
+      }
+      imageUrl = constructImageURL(re.photos.photo[0]);
+      
       imgtag      = document.querySelector(".pframe img");
       imgtag.src  = imageUrl;
   });
