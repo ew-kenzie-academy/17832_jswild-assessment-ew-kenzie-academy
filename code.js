@@ -1,49 +1,52 @@
 const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
 const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
-let history=[];
-let currentLocation;
+const history=[];
+let   currentLocation=null;
+
+class Position{
+  latitude  = null;
+  longitude = null;
+  stamp     = null;
+  constructor(lat,lon){
+    this.latitude  = lat;
+    this.longitude = lon;
+    this.stamp     = Date.now();
+  }
+}
 
 /*mdn::watchPosition*/
   const WATCH_OPTS = {
     enableHighAccuracy: false,
-    timeout: 8000,
-    maximumAge: 0
+    timeout:             8000,
+    maximumAge:             0,
   };
   
-  currentLocation = {
-    latitude :  null,
-    longitude:  null,
-    stamp:      null
-  };
-
-  function w_success(pos) {
+  function w_default(lat,lon){
+    currentLocation=new Position(lat,lon);
     history.push(currentLocation);
-    let crd = pos.coords;
-    currentLocation.latitude  = crd.latitude;
-    currentLocation.longitude = crd.longitude;    
-    currentLocation.stamp     = Date.now();
     printCurrent();
+  }
+
+  function w_success(pos) {    
+    w_default(pos.coords.latitude,pos.coords.longitude);
   }
   
   function w_failure(){
-    history.push(currentLocation);
-    currentLocation.latitude  = rlat();
-    currentLocation.longitude = rlon();    
-    currentLocation.stamp     = Date.now();
-    printCurrent();     
+    w_default(rlat(),rlon());
   }
   
   function w_error(err) {
     console.warn(':error: [' + err.code + '] ' + err.message);
+    console.log( ":error: Use random psrng instead");
     w_failure();
     setInterval( w_failure , 16000);
   }
   
   function printCurrent(){
       timeid =      String(Date.now()).substr(7,10);
-      console.log( `:print: <${timeid}> [lat] `  + currentLocation.latitude  );
-      console.log( `:print: <${timeid}> [lon] `  + currentLocation.longitude );
-      console.log( `:print: <${timeid}> [tim] `  + currentLocation.stamp     );
+      console.log( `:at: <${timeid}> [lat] `  + currentLocation.latitude  );
+      console.log( `:at: <${timeid}> [lon] `  + currentLocation.longitude );
+      console.log( `:at: <${timeid}> [tim] `  + currentLocation.stamp     );
   }
 
   function runif(n=-1){
@@ -68,7 +71,11 @@ let currentLocation;
   
   /* Begin Watching */
   console.log(":global: [thread-block] Please set location permission to Allow")
-  let w_id = navigator.geolocation.watchPosition(w_success, w_error, WATCH_OPTS);
+  let w_id = navigator.geolocation.watchPosition(
+      w_success
+    , w_error
+    , WATCH_OPTS
+  );
 
 /*mdn::watchPosition*/
 
@@ -106,14 +113,3 @@ function main(){
 }
 
 // setTimeout(main,10000);
-
-class Position{
-  latitude  = null;
-  longitude = null;
-  stamp     = null;
-  constructor(lat,lon){
-    this.latitude  = lat;
-    this.longitude = lon;
-    this.stamp     = Date.now();
-  }
-}
