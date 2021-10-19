@@ -1,5 +1,6 @@
 const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de"               ;
 const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/" ;
+const IMGTAG      = document.querySelector(".pframe img");
 const history    = []                                               ;
 let   currentLocation=null;
 
@@ -145,6 +146,8 @@ function replaceQueue(q){
   fillQueue(q);
 }
 function rotR(){
+  pivot=(pivot+1)%imgQueue.length;
+  refresh();
 }
 
 gvar=undefined;
@@ -163,12 +166,13 @@ function main(){
       newarr = arr.map( e=> constructImageURL(e));
       console.log(   newarr );
       replaceQueue(  newarr );
+      refresh();
       
-      imageUrl = newarr[0];
-      
-      imgtag      = document.querySelector(".pframe img");
-      imgtag.src  = imageUrl;
   });
+}
+
+function refresh(){
+    IMGTAG.src  = imgQueue[pivot];
 }
 
 // setTimeout(main,10000);
