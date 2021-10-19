@@ -12,15 +12,16 @@
   + https://stackoverflow.com/questions/46879570/call-a-javascript-function-infinitely
   + https://en.wikipedia.org/wiki/Latitude
   + https://en.wikipedia.org/wiki/Longitude
+  + https://developer.mozilla.org/en-US/docs/Web/CSS/Scaling_of_SVG_backgrounds
+  + https://inkscape.org/gallery/item/16685/How_to_Draw_a_Line.pdf
 */
 
 /* MDN Boilerplate */{  
   let options = {
     enableHighAccuracy: false,
     timeout: 5000,
-    maximumAge: 0
-  };
-
+    // maximumAge: 0
+  // };
   function success(pos) {
     let crd = pos.coords;
 
@@ -32,9 +33,8 @@
 
   function error(err) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
 
-
+    }
   navigator.geolocation.getCurrentPosition(success, error, options);
   
   /*

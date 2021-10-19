@@ -24,6 +24,8 @@ function getCity(city){
   let t=tupleToDouble;
   const index={
       EDINBURGH    :[t(55.953 ,0 , 0), (-1)*t( 3.189 , 0 , 0)]
+    , BELFAST      :[t(54 , 35,  47) , (-1)*t( 5 ,  55 , 48) ]
+    , LONDON       :[t(51 , 30,  26) , (-1)*t( 0 ,   7 , 39) ]
     , BOSTON       :[t(42 , 21 , 29) , (-1)*t( 71 ,  3 , 49) ]
     , INDIANAPOLIS :[t(39 , 46 ,  7) , (-1)*t( 86 ,  9 ,  0) ]
     , SAN_DIEGO    :[t(32 , 42 , 54) , (-1)*t(117 ,  9 , 45) ]
@@ -135,8 +137,13 @@ const imgQueue=
   ,"./turtle4.jpg"
   ]
 let pivot=0;
+
 function clearQueue(){
   while(imgQueue.pop()!=undefined);
+}
+
+function refresh(){
+    IMGTAG.src  = imgQueue[pivot];
 }
 function fillQueue(q){
   q.forEach(e => imgQueue.push(e));
@@ -147,6 +154,10 @@ function replaceQueue(q){
 }
 function rotR(){
   pivot=(pivot+1)%imgQueue.length;
+  refresh();
+}
+function rotL(){
+  pivot=(pivot-1+imgQueue.length)%imgQueue.length;
   refresh();
 }
 
@@ -160,20 +171,17 @@ function main(){
       console.log(":main: "+ re);
       arr=re.photos.photo;
       if(arr.length===0){
-        console.log(":main: "+ "Nothing here :P");
+        console.log(":main: "+ "There are no photographs here :P");
         return;
       }
       newarr = arr.map( e=> constructImageURL(e));
-      console.log(   newarr );
+      console.log ( ":main: [newarr] " + newarr );
       replaceQueue(  newarr );
       refresh();
       
   });
 }
 
-function refresh(){
-    IMGTAG.src  = imgQueue[pivot];
-}
 
 // setTimeout(main,10000);
 // currentLocation=getCity("INDIANAPOLIS");main()
