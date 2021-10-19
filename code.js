@@ -182,8 +182,9 @@ function main(){
   });
 }
 
-document.querySelector(".button, .left"  ).addEventListener("click", rotL);
-// document.querySelector(".button, .right" ).addEventListener("click", rotR);
+document.querySelector(".button.left"  ).addEventListener("click", rotL);
+document.querySelector(".button.right" ).addEventListener("click", rotR);
+
 
 
 // setTimeout(main,10000);
@@ -193,3 +194,10 @@ document.querySelector(".button, .left"  ).addEventListener("click", rotL);
 // currentLocation=getCity("MONTREAL");main()
 // currentLocation=getCity("EDINBURGH");main()
 // currentLocation=getCity("kyoto");main()
+
+function practice(e){
+  if(e !== undefined)
+    console.log(":practice: found ["+"undefined"+"]");
+  else
+    console.log(":practice: found ["+e+"]");
+}
