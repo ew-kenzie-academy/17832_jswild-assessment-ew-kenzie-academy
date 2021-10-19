@@ -148,17 +148,23 @@ function rotR(){
 }
 
 gvar=undefined;
+jaja=[];
 function main(){
   fetch(constructFetchURL())
     .then(re => re.json())
     .then(re => {
       gvar=re;
       console.log(":main: "+ re);
-      if(re.photos.photo.length===0){
+      arr=re.photos.photo;
+      if(arr.length===0){
         console.log(":main: "+ "Nothing here :P");
         return;
       }
-      imageUrl = constructImageURL(re.photos.photo[0]);
+      newarr = arr.map( e=> constructImageURL(e));
+      console.log(   newarr );
+      replaceQueue(  newarr );
+      
+      imageUrl = newarr[0];
       
       imgtag      = document.querySelector(".pframe img");
       imgtag.src  = imageUrl;
