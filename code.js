@@ -45,7 +45,7 @@ function getCity(city){
   return new Position( index[city][0] , index[city][1] );
 }
 
-/*watchPosition*/{
+/*watchPositionThread*/{
   function w_default(lat,lon){
     currentLocation=new Position(lat,lon);
     history.push(currentLocation);
@@ -79,7 +79,7 @@ function getCity(city){
     timeout            : 9999 ,
     maximumAge         : 0     ,
   };
-  
+
   /* Begin Watching */
   console.log(":global: [thread-block] Please set location permission to Allow")
   let w_id = navigator.geolocation.watchPosition(
@@ -87,8 +87,7 @@ function getCity(city){
     , w_error
     , w_OPTS
   );
-  
-/*watchPosition*/}
+/*watchPositionThread*/}
 
 /*psrng*/{
   function runif(n=-1){
@@ -119,15 +118,14 @@ function getCity(city){
     ]
   let pivot=0;
 
+  function fillQueue(q){
+    q.forEach(e => imgQueue.push(e));
+  }
   function clearQueue(){
     while(imgQueue.pop()!=undefined);
   }
-
   function refresh(){
       IMGTAG.src  = imgQueue[pivot];
-  }
-  function fillQueue(q){
-    q.forEach(e => imgQueue.push(e));
   }
   function replaceQueue(q){
     clearQueue();
@@ -144,9 +142,10 @@ function getCity(city){
   // CSS Selection: conjunction via concatenation
   document.querySelector(".button.left"  ).addEventListener("click", rotL);
   document.querySelector(".button.right" ).addEventListener("click", rotR);
+  refresh();
 /*abstractQueue*/}
 
-/*main*/{
+/*mainThread*/{
   function main(){
     fetch(constructFetchURL())
       .then(re => re.json())
@@ -187,10 +186,12 @@ function getCity(city){
       +`&text=turtle`;
     return CORS_PRE+srcURL;
   }
-/*main*/}
+/*mainThread*/}
 
 /*startThreads*/{
-  refresh();
+
+  
+
 /*startThreads*/}
 
 
