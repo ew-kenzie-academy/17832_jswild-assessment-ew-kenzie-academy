@@ -134,11 +134,18 @@ const imgQueue=
   ,"./turtle3.jpg"
   ,"./turtle4.jpg"
   ]
+let pivot=0;
 function clearQueue(){
   while(imgQueue.pop()!=undefined);
 }
 function fillQueue(q){
   q.forEach(e => imgQueue.push(e));
+}
+function replaceQueue(q){
+  clearQueue();
+  fillQueue(q);
+}
+function rotR(){
 }
 
 function main(){
