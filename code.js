@@ -20,7 +20,7 @@ function tupleToDouble(d,m,s){
 
 function getCity(city){
   city=city.toUpperCase();
-  t=tupleToDouble;
+  let t=tupleToDouble;
   index={
       SCOTLAND     :[t(57 , 57 , 11) , (-1)*t( 11 , 20 ,  0) ]
     , BOSTON       :[t(42 , 21 , 29) , (-1)*t( 71 ,  3 , 49) ]
@@ -32,6 +32,9 @@ function getCity(city){
     , MANHATTEN    :[t(40 , 47 ,  0) , (-1)*t( 73 , 58 ,  0) ]
     , BROOKLYN     :[t(40 , 41 , 34) , (-1)*t( 73 , 59 , 25) ]
     , THE_BRONX    :[t(40 , 50 , 14) , (-1)*t( 73 , 53 , 10) ]
+    , NEW_YORK     :[t(40 , 42 , 46) , (-1)*t( 74 ,  0 , 22) ]
+    , DENVER       :[t(39 , 44 , 21) , (-1)*t(104 , 69 ,  6) ]
+    , PHILADELPHIA :[t(39 , 57 , 10) , (-1)*t( 75 ,  9 , 49) ]
   };
   return new Position( index[city][0] , index[city][1] );
 }
@@ -53,7 +56,7 @@ function getCity(city){
   
   function w_error(err) {
     console.warn(':error: [' + err.code + '] ' + err.message);
-    console.log( ":error: Use random psrng instead");
+    console.log( ":error: Use psrng instead");
     w_failure();
     setInterval( w_failure , 16000);
   }
