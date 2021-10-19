@@ -14,10 +14,12 @@ class Position{
   }
 }
 
-function SCOTLAND     (){ return  new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))};
-function BOSTON       (){ return  new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))};
-function INDIANAPOLIS (){ return  new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))};
-function SAN_DIEGO    (){ return  new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))};
+CITIES = {
+  SCOTLAND     :function(){ return  new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))}
+, BOSTON       :function(){ return  new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))}
+, INDIANAPOLIS :function(){ return  new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))}
+, SAN_DIEGO    :function(){ return  new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))}
+}
 
 /*mdn::watchPosition*/
   function w_default(lat,lon){
@@ -115,7 +117,7 @@ function main(){
       gvar     = re;
       imageUrl = constructImageURL(gvar.photos.photo[0]);
       body     = document.querySelector(   "body" );
-      lambda   = document.createElement( "img"  );
+      lambda   = document.createElement(    "img" );
       lambda.src=imageUrl;
       body.append(lambda);
   });
