@@ -22,13 +22,13 @@ function getCity(city){
   city=city.toUpperCase();
   let t=tupleToDouble;
   index={
-      SCOTLAND     :[t(57 , 57 , 11) , (-1)*t( 11 , 20 ,  0) ]
+      EDINBURGH    :[t(55.953 ,0 , 0), (-1)*t( 3.189 , 0 , 0)]
     , BOSTON       :[t(42 , 21 , 29) , (-1)*t( 71 ,  3 , 49) ]
     , INDIANAPOLIS :[t(39 , 46 ,  7) , (-1)*t( 86 ,  9 ,  0) ]
     , SAN_DIEGO    :[t(32 , 42 , 54) , (-1)*t(117 ,  9 , 45) ]
     , SEATTLE      :[t(47 , 36 , 35) , (-1)*t(122 , 19 , 59) ]
     , LOS_ANGELES  :[t(34 ,  3 ,  0) , (-1)*t( 18 , 15 ,  0) ]
-    , KYOTO        :[t(35 , 42 ,  0) , (+1)*t(135 , 46 ,  6) ]
+    , KYOTO        :[t(35 , 0 ,  42) , (+1)*t(135 , 46 ,  6) ]
     , MANHATTEN    :[t(40 , 47 ,  0) , (-1)*t( 73 , 58 ,  0) ]
     , BROOKLYN     :[t(40 , 41 , 34) , (-1)*t( 73 , 59 , 25) ]
     , THE_BRONX    :[t(40 , 50 , 14) , (-1)*t( 73 , 53 , 10) ]
@@ -146,3 +146,5 @@ function main(){
 // currentLocation=getCity("SAN_DIEGO");currentLocation.longitude+=1/60;currentLocation.latitude+=1;main()
 // currentLocation=getCity("KYOTO");main()
 // currentLocation=getCity("MONTREAL");main()
+// currentLocation=getCity("EDINBURGH");main()
+// currentLocation=getCity("kyoto");main()
