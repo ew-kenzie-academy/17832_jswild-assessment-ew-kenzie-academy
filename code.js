@@ -90,7 +90,7 @@ let   currentLocation = null;
     pivot=(pivot-1+imgQueue.length)%imgQueue.length;
     refresh();
   }
-  /*<>*/
+  /*<start>*/
   fillQueue( 
     ["./turtle1.jpg"
     ,"./turtle2.jpg"
@@ -128,7 +128,7 @@ let   currentLocation = null;
       console.log( `:at: <${timeid}> [tim] `  + currentLocation.stamp     );
   }
   
-  /*<>*/
+  /*<start>*/
   const w_OPTS = {
     enableHighAccuracy : false ,
     timeout            : 9999 ,
@@ -183,7 +183,7 @@ let   currentLocation = null;
       +`&text=turtle`;
     return CORS_PRE+srcURL;
   }
-  /*<>*/
+  /*<start>*/
   setInterval(main,10000);
 /*mainThread*/}
 
