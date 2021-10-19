@@ -1,6 +1,6 @@
-const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de";
-const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/";
-const history=[];
+const PUBLIC_KEY = "7fa605c741f09836731d1fddf05680de"               ;
+const CORS_PRE   = "https://shrouded-mountain-15003.herokuapp.com/" ;
+const history    = []                                               ;
 let   currentLocation=null;
 
 class Position{
@@ -14,13 +14,11 @@ class Position{
   }
 }
 
+const SCOTLAND     = new Position(57 + 57/60 + 11/3600 , -(11 + 20/60           ));
+const BOSTON       = new Position(42 + 21/60 + 29/3600 , -(71 +  3/60 + 49/3600 ));
+const INDIANAPOLIS = new Position(39 + 46/60 +  7/3600 , -(86 +  9/60           ));
+
 /*mdn::watchPosition*/
-  const WATCH_OPTS = {
-    enableHighAccuracy: false,
-    timeout:             8000,
-    maximumAge:             0,
-  };
-  
   function w_default(lat,lon){
     currentLocation=new Position(lat,lon);
     history.push(currentLocation);
@@ -48,7 +46,21 @@ class Position{
       console.log( `:at: <${timeid}> [lon] `  + currentLocation.longitude );
       console.log( `:at: <${timeid}> [tim] `  + currentLocation.stamp     );
   }
-
+  
+  const w_OPTS = {
+    enableHighAccuracy : false ,
+    timeout            : 9999 ,
+    maximumAge         : 0     ,
+  };
+  
+  /* Begin Watching */
+  console.log(":global: [thread-block] Please set location permission to Allow")
+  let w_id = navigator.geolocation.watchPosition(
+      w_success
+    , w_error
+    , w_OPTS
+  );
+  
   function runif(n=-1){
     if(n==-1 || typeof n !== "number")
       return Math.random();
@@ -68,18 +80,7 @@ class Position{
   function rlon(){
     return rind()*Math.trunc(runif()*180)+runif(7);
   }
-  
-  /* Begin Watching */
-  console.log(":global: [thread-block] Please set location permission to Allow")
-  let w_id = navigator.geolocation.watchPosition(
-      w_success
-    , w_error
-    , WATCH_OPTS
-  );
-
 /*mdn::watchPosition*/
-
-/* Step 2 */ /* Step 3 */
 
 function constructImageURL (photoObj) {
   return    "https://farm"
