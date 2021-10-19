@@ -35,6 +35,8 @@ function getCity(city){
     , NEW_YORK     :[t(40 , 42 , 46) , (-1)*t( 74 ,  0 , 22) ]
     , DENVER       :[t(39 , 44 , 21) , (-1)*t(104 , 69 ,  6) ]
     , PHILADELPHIA :[t(39 , 57 , 10) , (-1)*t( 75 ,  9 , 49) ]
+    , BALTIMORE    :[t(37 , 17 , 22) , (-1)*t( 76 , 36 , 55) ]
+    , MONTREAL     :[t(45 , 30 , 32) , (-1)*t( 73 , 33 , 15) ]
   };
   return new Position( index[city][0] , index[city][1] );
 }
@@ -134,15 +136,13 @@ function main(){
       console.log(re);
       gvar     = re;
       imageUrl = constructImageURL(gvar.photos.photo[0]);
-      body     = document.querySelector(   "body" );
-      lambda   = document.createElement(    "img" );
-      lambda.src=imageUrl;
-      body.append(lambda);
+      imgtag      = document.querySelector(".pframe img");
+      imgtag.src  = imageUrl;
   });
 }
 
 // setTimeout(main,10000);
-// currentLocation=INDIANAPOLIS();main()
-// currentLocation=CITIES.SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
-// currentLocation=CITIES.SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
-// currentLocation=CITIES.KYOTO();main()
+// currentLocation=getCity("INDIANAPOLIS");main()
+// currentLocation=getCity("SAN_DIEGO");currentLocation.longitude+=1/60;currentLocation.latitude+=1;main()
+// currentLocation=getCity("KYOTO");main()
+// currentLocation=getCity("MONTREAL");main()
