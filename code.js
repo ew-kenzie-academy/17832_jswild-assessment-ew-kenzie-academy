@@ -23,7 +23,7 @@ CITIES = {
 , KYOTO        :function(){ return new Position(35 + 42/60           , +(135 + 46/60 +  6/3600 ))}
 }
 
-/*mdn::watchPosition*/
+/*watchPosition*/
   function w_default(lat,lon){
     currentLocation=new Position(lat,lon);
     history.push(currentLocation);
@@ -85,7 +85,7 @@ CITIES = {
   function rlon(){
     return rind()*Math.trunc(runif()*180)+runif(7);
   }
-/*mdn::watchPosition*/
+/*watchPosition*/
 
 function constructImageURL (photoObj) {
   return    "https://farm"

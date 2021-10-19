@@ -13,9 +13,17 @@ body h2{
 }
 
 body div.card{
-    color             : blue      ;
-    background-color  : lightblue ;
-    display           : flex      ;
-    flex-direction    : row       ;
-    height            : 5em       ;
+    color             : blue          ;
+    background-color  : lightblue     ;
+    display           : flex          ;
+    flex-direction    : row           ;
+    height            : 12em          ;
+    width             : 25em          ;
+    justify-content   : space-between ;
+    align-items       : center        ;
+}
+
+.button{
+    height:1em;
+    margin:.5em;
 }
