@@ -14,13 +14,41 @@ class Position{
   }
 }
 
+function tuptod(d,m,s){
+    return d + m/60 + s/3600;
+}
+
+function getCity(c){
+ return{
+  SCOTLAND     :function(){ return new Position(57 , 57/60 , 11/3600 , -( 11 , 20/60 ,  0/3600 ))}
+, BOSTON       :function(){ return new Position(42 , 21/60 , 29/3600 , -( 71 ,  3/60 , 49/3600 ))}
+, INDIANAPOLIS :function(){ return new Position(39 , 46/60 ,  7/3600 , -( 86 ,  9/60 ,  0/3600 ))}
+, SAN_DIEGO    :function(){ return new Position(32 , 42/60 , 54/3600 , -(117 ,  9/60 , 45/3600 ))}
+, SEATTLE      :function(){ return new Position(47 , 36/60 , 35/3600 , -(122 , 19/60 , 59/3600 ))}
+, LOS_ANGELES  :function(){ return new Position(34 ,  3/60 ,  0/3600 , -( 18 , 15/60 ,  0/3600 ))}
+, KYOTO        :function(){ return new Position(35 , 42/60 ,  0/3600 , +(135 , 46/60 ,  6/3600 ))}
+, MANHATTEN    :function(){ return new Position(40 , 47/60 ,  0/3600 , -( 73 , 58/60 ,  0/3600 ))}
+, BROOKLYN     :function(){ return new Position(40 , 41/60 , 34/3600 , -( 73 , 59/60 , 25/3600 ))}
+, THE_BRONX    :function(){ return new Position(40 , 50/60 , 14/3600 , -( 73 , 53/60 + 10/3600 ))}
+,   black: "#FFFFFF"
+,   white: "#000000"
+,   red:   "#FF0000"
+,   blue:  "#00AA00"
+,   green: "#0000AA"
+ }[color]
+}
+
 CITIES = {
-  SCOTLAND     :function(){ return new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))}
-, BOSTON       :function(){ return new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))}
-, INDIANAPOLIS :function(){ return new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))}
+  SCOTLAND     :function(){ return new Position(57 + 57/60 + 11/3600 , -( 11 + 20/60 +  0/3600 ))}
+, BOSTON       :function(){ return new Position(42 + 21/60 + 29/3600 , -( 71 +  3/60 + 49/3600 ))}
+, INDIANAPOLIS :function(){ return new Position(39 + 46/60 +  7/3600 , -( 86 +  9/60 +  0/3600 ))}
 , SAN_DIEGO    :function(){ return new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))}
-, LOS_ANGELES  :function(){ return new Position(34 +  3/60           , -(18  + 15/60           ))}
-, KYOTO        :function(){ return new Position(35 + 42/60           , +(135 + 46/60 +  6/3600 ))}
+, SEATTLE      :function(){ return new Position(47 + 36/60 + 35/3600 , -(122 + 19/60 + 59/3600 ))}
+, LOS_ANGELES  :function(){ return new Position(34 +  3/60 +  0/3600 , -( 18 + 15/60 +  0/3600 ))}
+, KYOTO        :function(){ return new Position(35 + 42/60 +  0/3600 , +(135 + 46/60 +  6/3600 ))}
+, MANHATTEN    :function(){ return new Position(40 + 47/60 +  0/3600 , -( 73 + 58/60 +  0/3600 ))}
+, BROOKLYN     :function(){ return new Position(40 + 41/60 + 34/3600 , -( 73 + 59/60 + 25/3600 ))}
+, THE_BRONX    :function(){ return new Position(40 + 50/60 + 14/3600 , -( 73 + 53/60 + 10/3600 ))}
 }
 
 /*watchPosition*/
