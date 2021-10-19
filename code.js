@@ -82,9 +82,13 @@ class Position{
 /* Step 2 */ /* Step 3 */
 
 function constructImageURL (photoObj) {
-  return "https://farm" + photoObj.farm +
-          ".staticflickr.com/" + photoObj.server +
-          "/" + photoObj.id + "_" + photoObj.secret + ".jpg";
+  return    "https://farm"
+          + photoObj.farm 
+          + ".staticflickr.com/" 
+          + photoObj.server 
+          + "/" + photoObj.id 
+          + "_" + photoObj.secret 
+          + ".jpg";
 }
 
 function constructFetchURL(){
@@ -107,9 +111,13 @@ function main(){
     .then(re => re.json())
     .then(re => {
       console.log(re);
-      gvar=re});
-  gvar.photos.photo[0];
-  imageUrl = constructImageURL(gvar.photos.photo[0]);
+      gvar=re;
+      imageUrl = constructImageURL(gvar.photos.photo[0]);
+      body=document.querySelector("body");
+      lambda=document.createElement("img");
+      lambda.src=imageUrl;
+      body.append(lambda);
+  });
 }
 
 // setTimeout(main,10000);
