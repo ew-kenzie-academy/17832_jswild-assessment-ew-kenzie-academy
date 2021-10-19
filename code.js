@@ -14,10 +14,10 @@ class Position{
   }
 }
 
-const SCOTLAND     = new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ));
-const BOSTON       = new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ));
-const INDIANAPOLIS = new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ));
-const SAN_DIEGO    = new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ));
+function SCOTLAND     (){ return  new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))};
+function BOSTON       (){ return  new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))};
+function INDIANAPOLIS (){ return  new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))};
+function SAN_DIEGO    (){ return  new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))};
 
 /*mdn::watchPosition*/
   function w_default(lat,lon){
@@ -122,4 +122,5 @@ function main(){
 }
 
 // setTimeout(main,10000);
-// currentLocation=INDIANAPOLIS;main()
+// currentLocation=INDIANAPOLIS();main()
+// currentLocation=SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
