@@ -15,10 +15,12 @@ class Position{
 }
 
 CITIES = {
-  SCOTLAND     :function(){ return  new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))}
-, BOSTON       :function(){ return  new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))}
-, INDIANAPOLIS :function(){ return  new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))}
-, SAN_DIEGO    :function(){ return  new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))}
+  SCOTLAND     :function(){ return new Position(57 + 57/60 + 11/3600 , -(11  + 20/60           ))}
+, BOSTON       :function(){ return new Position(42 + 21/60 + 29/3600 , -(71  +  3/60 + 49/3600 ))}
+, INDIANAPOLIS :function(){ return new Position(39 + 46/60 +  7/3600 , -(86  +  9/60           ))}
+, SAN_DIEGO    :function(){ return new Position(32 + 42/60 + 54/3600 , -(117 +  9/60 + 45/3600 ))}
+, LOS_ANGELES  :function(){ return new Position(34 +  3/60           , -(18  + 15/60           ))}
+, KYOTO        :function(){ return new Position(35 + 42/60           , +(135 + 46/60 +  6/3600 ))}
 }
 
 /*mdn::watchPosition*/
@@ -125,4 +127,6 @@ function main(){
 
 // setTimeout(main,10000);
 // currentLocation=INDIANAPOLIS();main()
-// currentLocation=SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
+// currentLocation=CITIES.SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
+// currentLocation=CITIES.SAN_DIEGO();currentLocation.longitude+=1;currentLocation.latitude+=1;main()
+// currentLocation=CITIES.KYOTO();main()
