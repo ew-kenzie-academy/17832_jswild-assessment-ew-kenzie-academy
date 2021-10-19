@@ -110,29 +110,6 @@ function getCity(city){
   }
 /*psrng*/}
 
-function constructImageURL (photoObj) {
-  return    "https://farm"
-          + photoObj.farm 
-          + ".staticflickr.com/" 
-          + photoObj.server 
-          + "/" + photoObj.id 
-          + "_" + photoObj.secret 
-          + ".jpg";
-}
-
-function constructFetchURL(){
-  let srcURL
-    =`https://flickr.com/services/rest/`
-    +`?api_key=`+PUBLIC_KEY
-    +`&format=json&nojsoncallback=1` 
-    +`&method=flickr.photos.search` 
-    +`&safe_search=1&per_page=5` 
-    +`&lat=${currentLocation.latitude}` 
-    +`&lon=${currentLocation.longitude}`  
-    +`&text=turtle`;
-  return CORS_PRE+srcURL;
-}
-
 /*abstractQueue*/{
   const imgQueue=
     ["./turtle1.jpg"
@@ -164,35 +141,60 @@ function constructFetchURL(){
     pivot=(pivot-1+imgQueue.length)%imgQueue.length;
     refresh();
   }
+  // CSS Selection: conjunction via concatenation
+  document.querySelector(".button.left"  ).addEventListener("click", rotL);
+  document.querySelector(".button.right" ).addEventListener("click", rotR);
 /*abstractQueue*/}
 
-gvar=undefined;
-jaja=[];
-function main(){
-  fetch(constructFetchURL())
-    .then(re => re.json())
-    .then(re => {
-      gvar=re;
-      console.log(":main: "+ re);
-      arr=re.photos.photo;
-      if(arr.length===0){
-        console.log(":main: "+ "There are no photographs here :P");
-        return;
-      }
-      newarr = arr.map( e=> constructImageURL(e));
-      console.log ( ":main: [newarr] " + newarr );
-      replaceQueue(  newarr );
-      refresh();
-      
-  });
-}
+/*main*/{
+  function main(){
+    fetch(constructFetchURL())
+      .then(re => re.json())
+      .then(re => {
+        gvar=re;
+        console.log(":main: "+ re);
+        arr=re.photos.photo;
+        if(arr.length===0){
+          console.log(":main: "+ "There are no photographs here :P");
+          return;
+        }
+        newarr = arr.map( e=> constructImageURL(e));
+        console.log ( ":main: [newarr] " + newarr );
+        replaceQueue( newarr );
+        refresh();
+    });
+  }
 
-// Conjunction via concatenation
-document.querySelector(".button.left"  ).addEventListener("click", rotL);
-document.querySelector(".button.right" ).addEventListener("click", rotR);
+  function constructImageURL (photoObj) {
+    return    "https://farm"
+            + photoObj.farm 
+            + ".staticflickr.com/" 
+            + photoObj.server 
+            + "/" + photoObj.id 
+            + "_" + photoObj.secret 
+            + ".jpg";
+  }
+
+  function constructFetchURL (){
+    let srcURL
+      =`https://flickr.com/services/rest/`
+      +`?api_key=`+PUBLIC_KEY
+      +`&format=json&nojsoncallback=1` 
+      +`&method=flickr.photos.search` 
+      +`&safe_search=1&per_page=5` 
+      +`&lat=${currentLocation.latitude}` 
+      +`&lon=${currentLocation.longitude}`  
+      +`&text=turtle`;
+    return CORS_PRE+srcURL;
+  }
+/*main*/}
+
+/*startThreads*/{
+  refresh();
+/*startThreads*/}
 
 
-
+/*tests*/{
 // setTimeout(main,10000);
 // currentLocation=getCity("INDIANAPOLIS");main()
 // currentLocation=getCity("SAN_DIEGO");currentLocation.longitude+=1/60;currentLocation.latitude+=1;main()
@@ -200,4 +202,4 @@ document.querySelector(".button.right" ).addEventListener("click", rotR);
 // currentLocation=getCity("MONTREAL");main()
 // currentLocation=getCity("EDINBURGH");main()
 // currentLocation=getCity("kyoto");main()
-
+/*tests*/}
