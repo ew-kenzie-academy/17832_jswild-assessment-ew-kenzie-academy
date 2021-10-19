@@ -182,6 +182,9 @@ function main(){
   });
 }
 
+document.querySelector(".button, .left"  ).addEventListener("click", rotL);
+// document.querySelector(".button, .right" ).addEventListener("click", rotR);
+
 
 // setTimeout(main,10000);
 // currentLocation=getCity("INDIANAPOLIS");main()
