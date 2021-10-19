@@ -21,7 +21,7 @@ function tupleToDouble(d,m,s){
 function getCity(city){
   city=city.toUpperCase();
   let t=tupleToDouble;
-  index={
+  const index={
       EDINBURGH    :[t(55.953 ,0 , 0), (-1)*t( 3.189 , 0 , 0)]
     , BOSTON       :[t(42 , 21 , 29) , (-1)*t( 71 ,  3 , 49) ]
     , INDIANAPOLIS :[t(39 , 46 ,  7) , (-1)*t( 86 ,  9 ,  0) ]
@@ -128,7 +128,19 @@ function constructFetchURL(){
   return CORS_PRE+srcURL;
 }
 
-let gvar   = undefined;
+const imgQueue=
+  ["./turtle1.jpg"
+  ,"./turtle2.jpg"
+  ,"./turtle3.jpg"
+  ,"./turtle4.jpg"
+  ]
+function clearQueue(){
+  while(imgQueue.pop()!=undefined);
+}
+function fillQueue(q){
+  q.forEach(e => imgQueue.push(e));
+}
+
 function main(){
   fetch(constructFetchURL())
     .then(re => re.json())
